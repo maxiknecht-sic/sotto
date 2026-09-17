@@ -47,28 +47,23 @@ scripts/configure.sh  sets the domain and email across every file
 
 ## Before launch
 
-Two values are placeholders and must be replaced. One command does both:
+This is a concept. The operating company is deliberately not named: `/legal/` and
+`/privacy/` say so in place of the registered entity, registry code, VAT number, address
+and board member. Those go in before the site goes live — the EU E-Commerce Directive
+and the Estonian Commercial Code both require them, and `dl.facts` in `assets/page.css`
+is the layout they return to.
+
+Two values are still placeholders. One command sets both:
 
 ```bash
 ./scripts/configure.sh --domain sotto.com --email hello@sotto.com
 ```
 
 That rewrites the canonical, the Open Graph URLs, the JSON-LD, `robots.txt`,
-`sitemap.xml` and every `mailto:` link, then lists whatever is still outstanding.
+`sitemap.xml` and every `mailto:` link.
 
-The remaining placeholders are company facts nobody can invent for you. They are marked
-in the HTML with `class="todo"` and render on a **yellow highlight**, so they cannot ship
-unnoticed. Find them with:
-
-```bash
-grep -rn 'class="todo"' --include='*.html' .
-```
-
-They are: the OÜ's legal name, registry code, VAT number, registered address and board
-member (in `/legal/`), and the go-live date (in `/privacy/`).
-
-One more: the figures in the **Specifications** table on the homepage are the comp's
-placeholder numbers. Measure the real rig and replace them — the table is the part of
+The figures in the **Specifications** table on the homepage are still the comp's
+placeholder numbers. Measure the real rig and replace them — that table is the part of
 this page a chief stewardess will actually read twice.
 
 ## The photography

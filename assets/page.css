@@ -87,6 +87,7 @@ li{margin-bottom:.4rem}
 .mute{color:var(--light-mute)}
 .updated{font-size:.9375rem;color:var(--light-mute);margin-bottom:2.5rem}
 
+/* Unused while the site is a concept; the operator details return to it. */
 dl.facts{margin:0;display:grid;grid-template-columns:11rem 1fr;max-width:46rem}
 dl.facts dt{padding:.7rem 0;border-top:1px solid var(--rule-light);color:var(--light-mute);font-size:.9375rem}
 dl.facts dd{padding:.7rem 0;margin:0;border-top:1px solid var(--rule-light)}
@@ -95,14 +96,6 @@ dl.facts dd{padding:.7rem 0;margin:0;border-top:1px solid var(--rule-light)}
   dl.facts dd{border-top:0;padding-top:0;padding-bottom:.9rem}
 }
 
-/* Unfilled launch-blocking values. Deliberately loud so they cannot ship unnoticed. */
-.todo{
-  background:#F6E7B8;
-  color:#4A3B12;
-  padding:.05em .4em;
-  font-family:var(--sans);
-  font-size:.9em;
-}
 
 a{color:inherit}
 a:focus-visible{outline:2px solid currentColor;outline-offset:4px}

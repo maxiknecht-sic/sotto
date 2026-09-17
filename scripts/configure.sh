@@ -62,5 +62,9 @@ echo "Done."
 [ -n "$NEW_EMAIL" ]  && echo "  email  -> $NEW_EMAIL"
 echo
 echo "Now check: git diff"
-echo "Remaining placeholders (company details, dates):"
-grep -rn 'class="todo"' --include='*.html' . | sed 's/^/  /' || echo "  none"
+if grep -rq 'class="todo"' --include='*.html' .; then
+  echo "Remaining placeholders:"
+  grep -rn 'class="todo"' --include='*.html' . | sed 's/^/  /'
+else
+  echo "No marked placeholders left."
+fi
