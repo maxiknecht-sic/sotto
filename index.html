@@ -63,8 +63,6 @@
   :root{
     --img-hero:image-set(url("/img/hero.webp") type("image/webp"),
                          url("/img/hero.jpg") type("image/jpeg"));
-    --img-night:image-set(url("/img/night.webp") type("image/webp"),
-                          url("/img/night.jpg") type("image/jpeg"));
   }
 
   :root{
@@ -82,6 +80,7 @@
     --serif:"Newsreader",Georgia,"Times New Roman",serif;
     --sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
     --col:34rem;
+    --content:72rem;
     --pad:clamp(1.5rem,7vw,7rem);
   }
 
@@ -105,49 +104,44 @@
   .skip:focus{left:0}
 
   section{padding:clamp(4.5rem,11vw,9rem) var(--pad)}
-  .col{max-width:var(--col)}
-  .wide{max-width:46rem}
+  .col{max-width:var(--col);margin-inline:auto}
 
   .z-night{background:var(--night);color:var(--dark-ink)}
   .z-deep{background:var(--deep);color:var(--dark-ink)}
-  .z-dusk{background:var(--dusk);color:var(--dark-ink)}
   .z-paper{background:var(--paper);color:var(--light-ink)}
   .z-stone{background:var(--stone);color:var(--light-ink)}
-  .z-night .mute,.z-deep .mute,.z-dusk .mute{color:var(--dark-mute)}
+  .z-night .mute,.z-deep .mute{color:var(--dark-mute)}
   .z-paper .mute,.z-stone .mute{color:var(--light-mute)}
 
-  /* ---- image slots ----
-     Held to a column rather than bled full width: the source is 736px, and across a
-     1440px viewport it was being stretched to twice its size. Contained, it renders
-     at roughly 1:1 and reads sharp. ---- */
-  .shot{
-    aspect-ratio:16/9;
-    max-width:46rem;
-    margin:0 var(--pad);
-    background-color:#21313A;
-    background-position:center;
-    background-size:cover;
-    background-repeat:no-repeat;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+  /* ---- collage: four frames butted together, edge to edge ---- */
+  .collage{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
   }
-  .s-night{background-image:var(--img-night);background-color:#16242C}
-  @media (max-width:40rem){.shot{aspect-ratio:4/3}}
+  .collage img{
+    width:100%;
+    height:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    display:block;
+  }
+  @media (max-width:60rem){
+    .collage{grid-template-columns:repeat(2,1fr)}
+  }
 
 
   /* ---- service areas: one overview instead of three full-width bands ---- */
   /* Follows another --paper section, so the top padding is pulled in: the
      heading and the grid carry the break, not a gap. */
   .areas{padding-top:clamp(1.5rem,4vw,3rem);padding-bottom:clamp(4.5rem,10vw,7.5rem)}
-  .areas-head{margin-bottom:clamp(2.25rem,5vw,3.25rem)}
+  .areas-head{margin-bottom:clamp(2.25rem,5vw,3.25rem);max-width:var(--content);margin-inline:auto}
   .areas-head h2{margin-bottom:0}
   .area-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:clamp(1.5rem,3.5vw,3rem);
-    max-width:76rem;
+    max-width:var(--content);
+    margin-inline:auto;
   }
   .area-item img{
     width:100%;
@@ -175,6 +169,8 @@
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
+    align-items:center;
+    text-align:center;
     padding:var(--pad);
     padding-bottom:clamp(3rem,8vw,6rem);
     background-color:#101D25;
@@ -210,7 +206,7 @@
     font-size:clamp(1.4rem,3.4vw,2rem);
     line-height:1.32;
     letter-spacing:-.01em;
-    margin:0;
+    margin:0 auto;
     max-width:24ch;
   }
 
@@ -218,7 +214,7 @@
     font-size:1rem;
     line-height:1.5;
     letter-spacing:.01em;
-    margin:1.4rem 0 0;
+    margin:1.4rem auto 0;
     max-width:34ch;
     color:var(--dark-mute);
   }
@@ -228,7 +224,8 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:clamp(2.5rem,6vw,5.5rem);
-    max-width:72rem;
+    max-width:var(--content);
+    margin-inline:auto;
     align-items:start;
   }
   .duo h2{margin-bottom:1.5rem}
@@ -401,14 +398,20 @@
   </div>
 </section>
 
-<div class="shot s-night" role="img" aria-label="Espresso martinis lined up along a bar, ready for service"></div>
-<section class="z-dusk area">
-  <div class="col">
-    <h2>Day into night</h2>
-    <p>Coffee holds the room until the bar takes over. From dusk, the same crew and the same bar serve espresso martinis built on the same coffee.</p>
-    <p class="mute">One supplier, one contract, and no gap in the middle of a fourteen-hour day.</p>
-  </div>
-</section>
+<div class="collage">
+  <picture><source srcset="/img/collage-1.webp" type="image/webp">
+    <img src="/img/collage-1.jpg" width="700" height="933" loading="lazy" decoding="async"
+         alt="Milk poured into a cup, the rosetta forming"></picture>
+  <picture><source srcset="/img/collage-2.webp" type="image/webp">
+    <img src="/img/collage-2.jpg" width="700" height="933" loading="lazy" decoding="async"
+         alt="A yacht deck laid for dinner as the sun goes down"></picture>
+  <picture><source srcset="/img/collage-3.webp" type="image/webp">
+    <img src="/img/collage-3.jpg" width="700" height="933" loading="lazy" decoding="async"
+         alt="Espresso martinis lined up along a bar, ready for service"></picture>
+  <picture><source srcset="/img/collage-4.webp" type="image/webp">
+    <img src="/img/collage-4.jpg" width="700" height="933" loading="lazy" decoding="async"
+         alt="A finished flat white handed across, latte art on top"></picture>
+</div>
 
 <section class="z-night contact">
   <div class="col">

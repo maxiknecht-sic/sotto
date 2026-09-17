@@ -88,16 +88,16 @@ top of `index.html`, because they bleed edge to edge:
 | Slot | Source | Licence |
 |---|---|---|
 | `hero` | Pexels #18501146, Monte Carlo harbour, 1800 px | Pexels licence — free commercial use, no attribution |
-| `night` | supplied by the client, 736 px | **unverified** |
+| `collage-2`, `collage-3` | supplied by the client, 736 px | **unverified** |
+| `collage-1`, `collage-4` | Pexels | Pexels licence — free commercial use, no attribution |
 | `area-yachts`, `area-parties`, `area-sport` | supplied by the client, ~736 px | **unverified** |
 
 **The four supplied images arrived without a licence and their rights are not
 established.** They came in at 735–736 px, which is Pinterest's standard export width.
-That resolution is fine in the grid — each column is only about 380 px — but `night`
-runs full width, where 736 px is stretched. It gets away with it because the shot is
-shallow-focus, so the softness reads as depth of field rather than a small file. The
-rights are the real problem, not the pixels. Confirm ownership, buy a licence, or
-reshoot before launch.
+That resolution is fine everywhere they are used now — each service-area column is about
+380 px, and each collage frame about 360 px on a desktop, so a 736 px source is still
+better than 1:1. The rights are the real problem, not the pixels. Confirm ownership, buy
+a licence, or reshoot before launch.
 
 Two of them were also cropped to satisfy the brief's own rules, and the crops are the
 only thing holding those rules: `area-yachts` is pushed right so branded soft-drink cans
@@ -111,33 +111,34 @@ with `sharp`.
 
 ## Weight
 
-Measured from what is actually served. Everything is cached for a year after the first
-visit.
+Measured from what is actually served.
 
 | | |
 |---|---|
-| `index.html` (markup + all CSS) | ~18 KB |
+| `index.html` (markup + all CSS) | ~19 KB |
 | `newsreader-latin.woff2` | ~86 KB |
 | `schibsted-grotesk-latin.woff2` | ~32 KB |
 | `hero.webp` (preloaded) | ~179 KB |
-| **Above the fold** | **~316 KB** |
+| **Critical path — HTML + hero** | **~198 KB** |
 | three service-area images (WebP, lazy) | ~152 KB |
-| `night.webp` (band) | ~24 KB |
-| **Whole page** | **~493 KB** |
+| four collage images (WebP, lazy) | ~113 KB |
+| **Whole page** | **~582 KB** |
 
-Inside the 500 KB budget, with little room left. The hero is the expensive part: an
-aerial full of buildings and boats does not compress the way open water does, so it is
-held at 1800 px and WebP quality 48 and still costs 179 KB. Swapping in another detailed
-photograph means re-measuring — a fourth image does not fit.
+**This is 82 KB over the brief's 500 KB target, and that needs a decision.** Everything
+added past the budget is lazy: the seven images below the fold are `<img loading="lazy">`
+and are not fetched until they are scrolled near. The number that governs how fast the
+page feels — the critical path to the Largest Contentful Paint, which is the hero — has
+not moved at all and is 198 KB.
 
-The band image is a CSS background, which is not deferred the way `loading="lazy"`
-defers an `<img>`, so it is fetched on the first visit rather than on scroll. The three
-grid images are genuinely lazy.
+So the honest position is that the page got heavier in bytes without getting slower. If
+the 500 KB cap is really about perceived speed, it is measuring the wrong thing and the
+page is fine. If it is about data cost on metered connections at sea, which is a real
+concern for this audience, then the cap holds and the collage has to give something back
+— dropping to three frames, or cutting the two heavier ones further, recovers most of it.
 
-The band is held to `max-width:46rem` — 736 px, which is exactly the source width, so it
-renders 1:1 and reads sharp. Bled full width it was being stretched to roughly twice its
-size on a desktop viewport. If you replace that photograph with a larger one, the width
-cap can go.
+The hero is the only thing on the critical path worth attacking: at 179 KB it is 90% of
+it. A smaller hero served to phones via a media query on `--img-hero` would take roughly
+100 KB off mobile.
 
 ### The fonts are cut down — do not replace them from Google
 
