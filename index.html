@@ -63,8 +63,6 @@
   :root{
     --img-hero:image-set(url("/img/hero.webp") type("image/webp"),
                          url("/img/hero.jpg") type("image/jpeg"));
-    --img-crew:image-set(url("/img/crew.webp") type("image/webp"),
-                         url("/img/crew.jpg") type("image/jpeg"));
     --img-night:image-set(url("/img/night.webp") type("image/webp"),
                           url("/img/night.jpg") type("image/jpeg"));
   }
@@ -130,7 +128,6 @@
     justify-content:center;
     overflow:hidden;
   }
-  .s-crew{background-image:var(--img-crew);background-color:#223039}
   .s-night{background-image:var(--img-night);background-color:#16242C}
   @media (max-width:40rem){.shot{aspect-ratio:4/3}}
 
@@ -367,8 +364,7 @@
   </div>
 </section>
 
-<div class="shot s-crew" role="img" aria-label="A barista's hands at the group head of an espresso machine"></div>
-<section class="z-paper area">
+<section class="z-paper">
   <div class="col">
     <h2>A crew you can put next to your guests</h2>
     <p>Our people come from international sport event delivery — UEFA EURO 2020 and 2024, the UEFA Champions League Finals of 2021 and 2025, and stadium hospitality in Berlin.</p>
@@ -377,7 +373,7 @@
   </div>
 </section>
 
-<div class="shot s-night" role="img" aria-label="Two espresso martinis on a wooden bar"></div>
+<div class="shot s-night" role="img" aria-label="Espresso martinis lined up along a bar, ready for service"></div>
 <section class="z-dusk area">
   <div class="col">
     <h2>Day into night</h2>

@@ -75,7 +75,7 @@ WebP with a JPEG fallback, `loading="lazy"`, explicit `width`/`height` so nothin
 as they load. Swap one by replacing `img/area-<name>.webp` and `.jpg`. Export at
 760 × 1013 (3:4); the grid never renders them wider than about 380 px.
 
-**The hero and the two full-width bands** are CSS backgrounds, driven by variables at the
+**The hero and the full-width band** are CSS backgrounds, driven by variables at the
 top of `index.html`, because they bleed edge to edge:
 
 ```css
@@ -87,15 +87,17 @@ top of `index.html`, because they bleed edge to edge:
 
 | Slot | Source | Licence |
 |---|---|---|
-| `hero` | Wikimedia Commons, 2200 px | CC BY 2.0 — credited on `/legal/` |
-| `crew`, `night` | CC0 stock, ~960 px | Public domain, no attribution |
-| `area-yachts`, `area-parties`, `area-sport` | supplied by the client | **unverified** |
+| `hero` | Pexels #34155535, 1800 px | Pexels licence — free commercial use, no attribution |
+| `night` | supplied by the client, 736 px | **unverified** |
+| `area-yachts`, `area-parties`, `area-sport` | supplied by the client, ~736 px | **unverified** |
 
-**The three service-area images were supplied without a licence and their rights are not
-established.** They arrived at 735–736 px, which is Pinterest's standard export width.
-That resolution is fine here — the grid only needs ~380 px — but the rights are the
-problem, not the pixels. Using them commercially without a licence is a real exposure.
-Either confirm ownership, buy a licence, or reshoot before launch.
+**The four supplied images arrived without a licence and their rights are not
+established.** They came in at 735–736 px, which is Pinterest's standard export width.
+That resolution is fine in the grid — each column is only about 380 px — but `night`
+runs full width, where 736 px is stretched. It gets away with it because the shot is
+shallow-focus, so the softness reads as depth of field rather than a small file. The
+rights are the real problem, not the pixels. Confirm ownership, buy a licence, or
+reshoot before launch.
 
 Two of them were also cropped to satisfy the brief's own rules, and the crops are the
 only thing holding those rules: `area-yachts` is pushed right so branded soft-drink cans
@@ -109,26 +111,28 @@ with `sharp`.
 
 ## Weight
 
-Measured in the browser, not estimated. Everything is cached for a year after the first
+Measured from what is actually served. Everything is cached for a year after the first
 visit.
 
 | | |
 |---|---|
-| `index.html` (markup + all CSS) | ~18 KB |
+| `index.html` (markup + all CSS) | ~17 KB |
 | `newsreader-latin.woff2` | ~129 KB |
 | `schibsted-grotesk-latin.woff2` | ~46 KB |
-| `hero.webp` (preloaded) | ~82 KB |
-| **Above the fold** | **~275 KB** |
+| `hero.webp` (preloaded) | ~85 KB |
+| **Above the fold** | **~276 KB** |
 | three service-area images (WebP, lazy) | ~152 KB |
-| `crew.webp` + `night.webp` (full-width bands) | ~57 KB |
-| **Whole page** | **~484 KB** |
+| `night.webp` (full-width band) | ~20 KB |
+| **Whole page** | **~449 KB** |
 
-Inside the 500 KB budget, but not by much — the service-area images are held at WebP
-quality 64 to keep it there. Adding a fourth photograph means re-checking this number.
+Inside the 500 KB budget. The hero is held at WebP quality 58 and 1800 px: open water is
+expensive to compress, and at quality 76 and 2200 px the same shot cost 168 KB and put
+the page over budget. It survives the lower setting because the subject is near-abstract
+dark water, where lost detail is invisible — a sharp-edged photograph would not.
 
-The two band images are CSS backgrounds, which are not deferred the way `loading="lazy"`
-defers an `<img>`, so they are fetched on the first visit rather than on scroll. The
-three grid images are genuinely lazy.
+The band image is a CSS background, which is not deferred the way `loading="lazy"`
+defers an `<img>`, so it is fetched on the first visit rather than on scroll. The three
+grid images are genuinely lazy.
 
 The `latin-ext` font files ship too but are only fetched if a page actually uses an
 Eastern European character, because each `@font-face` carries a `unicode-range`. They
