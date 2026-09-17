@@ -234,6 +234,16 @@
     letter-spacing:-.04em;
     margin:0;
     text-align:center;
+    /* A soft pool of --night behind the mark, which sits over the brightest part
+       of the harbour. Painted as the element's own background and faded to nothing
+       well inside the edges, so it reads as depth in the photograph rather than a
+       panel. The padding exists to give the fade room to finish. */
+    padding:clamp(1.25rem,3.5vw,3rem) 0;
+    background:radial-gradient(ellipse 52% 60% at 50% 50%,
+      rgba(14,26,33,.80) 0%,
+      rgba(14,26,33,.62) 40%,
+      rgba(14,26,33,.28) 68%,
+      rgba(14,26,33,0) 100%);
   }
   .hero-lockup{
     display:flex;
