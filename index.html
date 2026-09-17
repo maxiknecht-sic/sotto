@@ -224,19 +224,15 @@
     gap:1.5rem 2.5rem;
     flex-wrap:wrap;
   }
-  .hero-lockup{
-    display:flex;
-    align-items:baseline;
-    gap:clamp(.9rem,2vw,1.75rem);
-    flex-wrap:wrap;
-  }
   .mark{
     font-family:var(--serif);
     font-weight:200;
-    font-size:1.6rem;
+    /* Clearly under the setup line rather than beside it in size: at 36px against
+       40px the two read as one mis-set block instead of a mark over a claim. */
+    font-size:clamp(1.15rem,1.85vw,1.6rem);
     line-height:1;
-    letter-spacing:-.03em;
-    margin:0;
+    letter-spacing:-.02em;
+    margin:0 0 clamp(1rem,2.2vw,1.6rem);
   }
   .descriptor{
     font-size:.8125rem;
@@ -284,11 +280,15 @@
     letter-spacing:-.03em;
   }
 
+  /* Same face and size as .claim-setup. */
   .hero-sub{
-    font-size:.9375rem;
-    line-height:1.55;
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(1.45rem,3.2vw,2.5rem);
+    line-height:1.22;
+    letter-spacing:-.015em;
     margin:0;
-    max-width:46ch;
+    max-width:30ch;
     color:var(--dark-ink);
   }
 
@@ -394,14 +394,12 @@
   <div class="hero-inner">
 
     <div class="hero-top reveal">
-      <div class="hero-lockup">
-        <h1 class="mark">sotto</h1>
-        <p class="descriptor">Specialty coffee &amp; espresso martini service</p>
-      </div>
+      <p class="descriptor">Specialty coffee &amp; espresso martini service</p>
       <p class="hero-contact"><a href="mailto:hello@sotto.example">hello@sotto.example</a></p>
     </div>
 
     <div class="hero-bottom">
+      <h1 class="mark reveal reveal-2">sotto</h1>
       <p class="claim reveal reveal-2">
         <span class="claim-setup">Everything was chosen with care.</span>
         <em class="claim-turn">The coffee wasn&rsquo;t.</em>
