@@ -1,7 +1,7 @@
 # Sotto — project context
 
 Static one-page site for **Sotto**, a specialty coffee and espresso martini service for private
-yachts, private parties and sport hospitality on the Côte d'Azur.
+yachts, private parties and sport hospitality. Based on the Côte d'Azur, working Europe-wide.
 
 `sotto.html` is the approved design. Port it, don't redesign it.
 
