@@ -332,7 +332,15 @@
     margin-inline:auto;
     align-items:start;
   }
-  .duo h2{margin-bottom:1.5rem}
+  /* Sized so the longest heading in a pair holds one line inside a 532px column:
+     at the global 40px it needed 589px. The 20ch cap has to go too, or it wraps
+     at 456px regardless of size. Both headings in a pair share this, since two
+     side by side at different sizes reads as an error. */
+  .duo h2{
+    margin-bottom:1.5rem;
+    max-width:none;
+    font-size:clamp(1.4rem,2.2vw,2.2rem);
+  }
   .duo p{max-width:46ch}
   @media (max-width:60rem){
     .duo{grid-template-columns:1fr;gap:clamp(3rem,9vw,4.5rem);max-width:var(--col)}
@@ -445,10 +453,9 @@
 <section class="z-deep">
   <div class="duo">
     <div>
-      <h2>The Blind Spot in High-End Hospitality</h2>
+      <h2>The blind spot in high-end hospitality</h2>
       <p>The wine is carefully selected. The caviar is sourced. The menu is built by a Michelin-starred chef. Then the coffee arrives from a pod machine or from a flask that&rsquo;s been sitting since breakfast.</p>
       <p>It&rsquo;s the only thing on the table nobody planned for. And it&rsquo;s what your guests ask for most, all day long.</p>
-      <p class="mute">A five-star hotel solved this years ago. A deck, a villa terrace, a hospitality suite, a private residence &mdash; usually not.</p>
     </div>
     <div>
       <h2>What we actually do</h2>
