@@ -63,12 +63,6 @@
   :root{
     --img-hero:image-set(url("/img/hero.webp") type("image/webp"),
                          url("/img/hero.jpg") type("image/jpeg"));
-    --img-yachts:image-set(url("/img/yachts.webp") type("image/webp"),
-                           url("/img/yachts.jpg") type("image/jpeg"));
-    --img-parties:image-set(url("/img/parties.webp") type("image/webp"),
-                            url("/img/parties.jpg") type("image/jpeg"));
-    --img-sport:image-set(url("/img/sport.webp") type("image/webp"),
-                          url("/img/sport.jpg") type("image/jpeg"));
     --img-crew:image-set(url("/img/crew.webp") type("image/webp"),
                          url("/img/crew.jpg") type("image/jpeg"));
     --img-night:image-set(url("/img/night.webp") type("image/webp"),
@@ -136,12 +130,41 @@
     justify-content:center;
     overflow:hidden;
   }
-  .s-yachts{background-image:var(--img-yachts);background-color:#24343D}
-  .s-parties{background-image:var(--img-parties);background-color:#1D2B33}
-  .s-sport{background-image:var(--img-sport);background-color:#2A3A42}
   .s-crew{background-image:var(--img-crew);background-color:#223039}
   .s-night{background-image:var(--img-night);background-color:#16242C}
   @media (max-width:40rem){.shot{aspect-ratio:4/3}}
+
+
+  /* ---- service areas: one overview instead of three full-width bands ---- */
+  /* Follows another --paper section, so the top padding is pulled in: the
+     heading and the grid carry the break, not a gap. */
+  .areas{padding-top:clamp(1.5rem,4vw,3rem);padding-bottom:clamp(4.5rem,10vw,7.5rem)}
+  .areas-head{margin-bottom:clamp(2.25rem,5vw,3.25rem)}
+  .areas-head h2{margin-bottom:0}
+  .area-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:clamp(1.5rem,3.5vw,3rem);
+    max-width:76rem;
+  }
+  .area-item img{
+    width:100%;
+    height:auto;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    display:block;
+    margin-bottom:1.5rem;
+  }
+  .area-item h3{
+    margin:0 0 .9rem;
+    padding-top:1rem;
+    border-top:1px solid var(--rule-light);
+  }
+  .area-item p{max-width:42ch}
+  @media (max-width:60rem){
+    .area-grid{grid-template-columns:1fr;gap:clamp(2.5rem,7vw,3.5rem);max-width:var(--col)}
+    .area-item img{aspect-ratio:4/3;margin-bottom:1.25rem}
+  }
 
   /* ---- hero ---- */
   .hero{
@@ -287,30 +310,45 @@
   </div>
 </section>
 
-<div class="shot s-yachts" role="img" aria-label="A cappuccino with latte art, on a dark wooden table"></div>
-<section class="z-paper area">
-  <div class="col">
-    <h3>Coffee on board</h3>
-    <p>Yachts and charters, at anchor or alongside. We arrive self-contained and never touch your galley — no plumbing, no gas, no interior crew pulled off station.</p>
-    <p class="mute">Charter weeks, owners&rsquo; trips, guest arrivals, Monaco Yacht Show.</p>
+<section class="z-paper areas">
+  <div class="areas-head">
+    <h2>Where we work</h2>
   </div>
-</section>
+  <div class="area-grid">
 
-<div class="shot s-parties" role="img" aria-label="An infinity pool on a terrace, looking out over wooded hills"></div>
-<section class="z-paper area">
-  <div class="col">
-    <h3>Private parties</h3>
-    <p>Villas, pools, terraces and residences. Welcome coffee as guests arrive, service through dinner, and the bar from dusk onward — one crew across the whole day.</p>
-    <p class="mute">Cannes during the festival, Monaco over the Grand Prix, private celebrations along the coast.</p>
-  </div>
-</section>
+    <article class="area-item">
+      <picture>
+        <source srcset="/img/area-yachts.webp" type="image/webp">
+        <img src="/img/area-yachts.jpg" width="760" height="1013" loading="lazy" decoding="async"
+             alt="A yacht's aft bar laid for service, looking out over the harbour at Monaco">
+      </picture>
+      <h3>Coffee on board</h3>
+      <p>Yachts and charters, at anchor or alongside. We arrive self-contained and never touch your galley — no plumbing, no gas, no interior crew pulled off station.</p>
+      <p class="mute">Charter weeks, owners&rsquo; trips, guest arrivals, Monaco Yacht Show.</p>
+    </article>
 
-<div class="shot s-sport" role="img" aria-label="A flag on a coastal golf green, the sea beyond it"></div>
-<section class="z-paper area">
-  <div class="col">
-    <h3>Sport hospitality</h3>
-    <p>Paddock suites, golf tournament hospitality, stadium VIP areas and sponsor lounges. Long days where guests and your own team both need to stay sharp, and where accreditation and load-in windows are not negotiable.</p>
-    <p class="mute">We work the VIP tier only — not concourses, not general catering, not crew meals.</p>
+    <article class="area-item">
+      <picture>
+        <source srcset="/img/area-parties.webp" type="image/webp">
+        <img src="/img/area-parties.jpg" width="760" height="1013" loading="lazy" decoding="async"
+             alt="An outdoor bar set up on a lawn under a parasol, glassware lined up ready for guests">
+      </picture>
+      <h3>Private parties</h3>
+      <p>Villas, pools, terraces and residences. Welcome coffee as guests arrive, service through dinner, and the bar from dusk onward — one crew across the whole day.</p>
+      <p class="mute">Cannes during the festival, Monaco over the Grand Prix, private celebrations along the coast.</p>
+    </article>
+
+    <article class="area-item">
+      <picture>
+        <source srcset="/img/area-sport.webp" type="image/webp">
+        <img src="/img/area-sport.jpg" width="760" height="1013" loading="lazy" decoding="async"
+             alt="A hospitality terrace laid for service, overlooking a polo field in play">
+      </picture>
+      <h3>Sport hospitality</h3>
+      <p>Paddock suites, golf tournament hospitality, stadium VIP areas and sponsor lounges. Long days where guests and your own team both need to stay sharp, and where accreditation and load-in windows are not negotiable.</p>
+      <p class="mute">We work the VIP tier only — not concourses, not general catering, not crew meals.</p>
+    </article>
+
   </div>
 </section>
 

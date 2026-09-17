@@ -38,7 +38,7 @@ assets/page.css     shared styles for the two legal pages only
 assets/favicon.svg  wordmark favicon
 assets/og.png       1200×630 social preview image
 fonts/*.woff2       Newsreader + Schibsted Grotesk, latin and latin-ext subsets
-img/                photography, WebP + JPEG (interim stock — see below)
+img/                photography, WebP + JPEG (mixed provenance — see below)
 robots.txt          allows everything, points at the sitemap
 sitemap.xml         one URL, the homepage
 vercel.json         static config, caching and security headers
@@ -73,43 +73,49 @@ this page a chief stewardess will actually read twice.
 
 ## The photography
 
-Six slots, all driven by CSS variables at the top of `index.html`. Each one names a
-WebP and a JPEG, and `image-set()` lets the browser take whichever it supports:
+There are two mechanisms, because the page uses images in two ways.
+
+**The three service-area images** in "Where we work" are real `<picture>` elements —
+WebP with a JPEG fallback, `loading="lazy"`, explicit `width`/`height` so nothing shifts
+as they load. Swap one by replacing `img/area-<name>.webp` and `.jpg`. Export at
+760 × 1013 (3:4); the grid never renders them wider than about 380 px.
+
+**The hero and the two full-width bands** are CSS backgrounds, driven by variables at the
+top of `index.html`, because they bleed edge to edge:
 
 ```css
 --img-hero:image-set(url("/img/hero.webp") type("image/webp"),
                      url("/img/hero.jpg")  type("image/jpeg"));
 ```
 
-**What is in there now is interim stock, and should be replaced.** Five of the six are
-public domain (CC0) and need no attribution; the harbour-at-dusk hero is CC BY 2.0 and
-is credited on `/legal/` as that licence requires. If you replace it, remove that credit.
+### Provenance — read before launch
 
-Two honest caveats:
+| Slot | Source | Licence |
+|---|---|---|
+| `hero` | Wikimedia Commons, 2200 px | CC BY 2.0 — credited on `/legal/` |
+| `crew`, `night` | CC0 stock, ~960 px | Public domain, no attribution |
+| `area-yachts`, `area-parties`, `area-sport` | supplied by the client | **unverified** |
 
-- **Resolution.** Only the hero is a full-resolution original (2200 px). The other five
-  came from sources that cap free downloads at around 1000 px, so they are served at
-  their native size and will look soft on a large display. They are placeholders that
-  photograph well at a glance, not finished assets.
-- **Subject.** `parties` is the weakest — an infinity pool over wooded hills, which
-  reads tropical resort rather than Côte d'Azur. Replace that one first. `yachts` is a
-  cappuccino on a table rather than coffee served on a deck.
+**The three service-area images were supplied without a licence and their rights are not
+established.** They arrived at 735–736 px, which is Pinterest's standard export width.
+That resolution is fine here — the grid only needs ~380 px — but the rights are the
+problem, not the pixels. Using them commercially without a licence is a real exposure.
+Either confirm ownership, buy a licence, or reshoot before launch.
 
-To replace one, drop `name.webp` and `name.jpg` into `/img/` over the existing pair.
-No other change is needed. Export at 2200 px wide for the hero and 1800 px for the
-bands, and keep each WebP under about 60 KB — the hero under 100 KB.
+Two of them were also cropped to satisfy the brief's own rules, and the crops are the
+only thing holding those rules: `area-yachts` is pushed right so branded soft-drink cans
+at the left of the bar fall outside the frame, and `area-parties` is pulled wide so the
+bartender reads as a figure at the bar rather than a portrait. Re-crop either one and
+those problems come back.
 
 Rules from the brief: nothing with visible logos, recognisable faces, or editorial-only
 sports licensing. There is no image tooling in this repo; the current set was produced
-with `sharp`, e.g.:
-
-```bash
-npx sharp-cli -i shot.jpg -o img/parties.webp resize 1800 1013 --fit cover -- webp -q 76
-```
+with `sharp`.
 
 ## Weight
 
-Everything is cached for a year after the first visit.
+Measured in the browser, not estimated. Everything is cached for a year after the first
+visit.
 
 | | |
 |---|---|
@@ -118,12 +124,16 @@ Everything is cached for a year after the first visit.
 | `schibsted-grotesk-latin.woff2` | ~46 KB |
 | `hero.webp` (preloaded) | ~82 KB |
 | **Above the fold** | **~275 KB** |
-| the five band photographs (WebP) | ~163 KB |
-| **Whole page** | **~437 KB** |
+| three service-area images (WebP, lazy) | ~152 KB |
+| `crew.webp` + `night.webp` (full-width bands) | ~57 KB |
+| **Whole page** | **~484 KB** |
 
-Measured in the browser, not estimated. Inside the 500 KB budget, with the caveat that
-CSS background images are not deferred the way `loading="lazy"` defers an `<img>`, so
-the band photographs are fetched on the first visit rather than on scroll.
+Inside the 500 KB budget, but not by much — the service-area images are held at WebP
+quality 64 to keep it there. Adding a fourth photograph means re-checking this number.
+
+The two band images are CSS backgrounds, which are not deferred the way `loading="lazy"`
+defers an `<img>`, so they are fetched on the first visit rather than on scroll. The
+three grid images are genuinely lazy.
 
 The `latin-ext` font files ship too but are only fetched if a page actually uses an
 Eastern European character, because each `@font-face` carries a `unicode-range`. They
