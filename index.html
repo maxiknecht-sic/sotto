@@ -224,13 +224,16 @@
     gap:1.5rem 2.5rem;
     flex-wrap:wrap;
   }
+  /* Its own band between the top line and the claim. hero-inner spaces the three
+     apart, so the mark lands in the middle of the frame. */
   .mark{
     font-family:var(--serif);
     font-weight:200;
-    font-size:clamp(2.25rem,4.8vw,4.25rem);
-    line-height:.95;
-    letter-spacing:-.035em;
-    margin:0 0 clamp(1.1rem,2.4vw,1.75rem);
+    font-size:clamp(3.5rem,10vw,10rem);
+    line-height:.9;
+    letter-spacing:-.04em;
+    margin:0;
+    text-align:center;
   }
   .hero-lockup{
     display:flex;
@@ -415,13 +418,14 @@
       <p class="hero-contact"><a href="mailto:hello@sotto.example">hello@sotto.example</a></p>
     </div>
 
+    <h1 class="mark reveal reveal-2">sotto</h1>
+
     <div class="hero-bottom">
-      <h1 class="mark reveal reveal-2">sotto</h1>
-      <p class="claim reveal reveal-2">
+      <p class="claim reveal reveal-3">
         <span class="claim-setup">Everything was chosen with care.</span>
         <em class="claim-turn">The coffee wasn&rsquo;t.</em>
       </p>
-      <p class="hero-sub reveal reveal-3">Specialty coffee and espresso martinis, brought to yachts, private villas and VIP hospitality suites Europe-wide.</p>
+      <p class="hero-sub reveal reveal-4">Specialty coffee and espresso martinis, brought to yachts, private villas and VIP hospitality suites Europe-wide.</p>
     </div>
 
   </div>
