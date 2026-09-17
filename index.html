@@ -28,6 +28,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
+<link rel="preload" href="/img/hero.webp" as="image" type="image/webp">
 <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -55,17 +56,23 @@
   }
 
   /* ======================================================================
-     IMAGE SLOTS — replace each value with the image, e.g. url("/img/hero.jpg")
-     Left as none, the slot shows a tonal band describing the shot.
-     See README.md → "Adding the photography".
+     IMAGE SLOTS — WebP with a JPEG fallback, chosen per browser by image-set().
+     To swap a photograph, drop both files in /img/ and change the two paths.
+     See README.md → "The photography".
      ====================================================================== */
   :root{
-    --img-hero:none;        /* Yacht deck at dusk, low light, wide         */
-    --img-yachts:none;      /* Coffee served on deck, daylight            */
-    --img-parties:none;     /* Villa terrace or poolside, evening, guests */
-    --img-sport:none;       /* Golf or paddock hospitality, daytime       */
-    --img-crew:none;        /* Barista at work, hands and machine, close  */
-    --img-night:none;       /* Espresso martinis on the bar, after dark   */
+    --img-hero:image-set(url("/img/hero.webp") type("image/webp"),
+                         url("/img/hero.jpg") type("image/jpeg"));
+    --img-yachts:image-set(url("/img/yachts.webp") type("image/webp"),
+                           url("/img/yachts.jpg") type("image/jpeg"));
+    --img-parties:image-set(url("/img/parties.webp") type("image/webp"),
+                            url("/img/parties.jpg") type("image/jpeg"));
+    --img-sport:image-set(url("/img/sport.webp") type("image/webp"),
+                          url("/img/sport.jpg") type("image/jpeg"));
+    --img-crew:image-set(url("/img/crew.webp") type("image/webp"),
+                         url("/img/crew.jpg") type("image/jpeg"));
+    --img-night:image-set(url("/img/night.webp") type("image/webp"),
+                          url("/img/night.jpg") type("image/jpeg"));
   }
 
   :root{
@@ -128,17 +135,6 @@
     align-items:center;
     justify-content:center;
     overflow:hidden;
-  }
-  .shot::after{
-    content:attr(data-shot);
-    font-size:.6875rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:rgba(233,231,225,.32);
-    text-align:center;
-    padding:0 2rem;
-    max-width:34ch;
-    line-height:1.6;
   }
   .s-yachts{background-image:var(--img-yachts);background-color:#24343D}
   .s-parties{background-image:var(--img-parties);background-color:#1D2B33}
@@ -291,7 +287,7 @@
   </div>
 </section>
 
-<div class="shot s-yachts" role="img" aria-label="Coffee served on deck in daylight" data-shot="Coffee served on deck, daylight"></div>
+<div class="shot s-yachts" role="img" aria-label="A cappuccino with latte art, on a dark wooden table"></div>
 <section class="z-paper area">
   <div class="col">
     <h3>Coffee on board</h3>
@@ -300,7 +296,7 @@
   </div>
 </section>
 
-<div class="shot s-parties" role="img" aria-label="A villa terrace poolside in the evening" data-shot="Villa terrace or poolside, evening"></div>
+<div class="shot s-parties" role="img" aria-label="An infinity pool on a terrace, looking out over wooded hills"></div>
 <section class="z-paper area">
   <div class="col">
     <h3>Private parties</h3>
@@ -309,7 +305,7 @@
   </div>
 </section>
 
-<div class="shot s-sport" role="img" aria-label="Golf or paddock hospitality in daytime" data-shot="Golf or paddock hospitality, daytime"></div>
+<div class="shot s-sport" role="img" aria-label="A flag on a coastal golf green, the sea beyond it"></div>
 <section class="z-paper area">
   <div class="col">
     <h3>Sport hospitality</h3>
@@ -333,7 +329,7 @@
   </div>
 </section>
 
-<div class="shot s-crew" role="img" aria-label="A barista at work, hands and machine, close up" data-shot="Barista at work, hands and machine, close"></div>
+<div class="shot s-crew" role="img" aria-label="A barista's hands at the group head of an espresso machine"></div>
 <section class="z-paper area">
   <div class="col">
     <h2>A crew you can put next to your guests</h2>
@@ -343,7 +339,7 @@
   </div>
 </section>
 
-<div class="shot s-night" role="img" aria-label="Espresso martinis on the bar after dark" data-shot="Espresso martinis on the bar, after dark"></div>
+<div class="shot s-night" role="img" aria-label="Two espresso martinis on a wooden bar"></div>
 <section class="z-dusk area">
   <div class="col">
     <h2>Day into night</h2>

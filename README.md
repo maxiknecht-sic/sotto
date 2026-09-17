@@ -38,7 +38,7 @@ assets/page.css     shared styles for the two legal pages only
 assets/favicon.svg  wordmark favicon
 assets/og.png       1200×630 social preview image
 fonts/*.woff2       Newsreader + Schibsted Grotesk, latin and latin-ext subsets
-img/                photography (see below) — currently empty
+img/                photography, WebP + JPEG (interim stock — see below)
 robots.txt          allows everything, points at the sitemap
 sitemap.xml         one URL, the homepage
 vercel.json         static config, caching and security headers
@@ -71,52 +71,63 @@ One more: the figures in the **Specifications** table on the homepage are the co
 placeholder numbers. Measure the real rig and replace them — the table is the part of
 this page a chief stewardess will actually read twice.
 
-## Adding the photography
+## The photography
 
-Six slots, all driven by CSS variables at the top of `index.html`:
-
-```css
-:root{
-  --img-hero:none;        /* Yacht deck at dusk, low light, wide         */
-  --img-yachts:none;      /* Coffee served on deck, daylight            */
-  --img-parties:none;     /* Villa terrace or poolside, evening, guests */
-  --img-sport:none;       /* Golf or paddock hospitality, daytime       */
-  --img-crew:none;        /* Barista at work, hands and machine, close  */
-  --img-night:none;       /* Espresso martinis on the bar, after dark   */
-}
-```
-
-Drop the file in `/img/` and point the variable at it:
+Six slots, all driven by CSS variables at the top of `index.html`. Each one names a
+WebP and a JPEG, and `image-set()` lets the browser take whichever it supports:
 
 ```css
---img-hero:url("/img/hero.jpg");
+--img-hero:image-set(url("/img/hero.webp") type("image/webp"),
+                     url("/img/hero.jpg")  type("image/jpeg"));
 ```
 
-Left as `none`, the slot renders as a tonal band with a small caption describing the
-shot. That is the current state: no broken images, nothing that looks unfinished, but
-the page is visibly waiting for its photography.
+**What is in there now is interim stock, and should be replaced.** Five of the six are
+public domain (CC0) and need no attribution; the harbour-at-dusk hero is CC BY 2.0 and
+is credited on `/legal/` as that licence requires. If you replace it, remove that credit.
+
+Two honest caveats:
+
+- **Resolution.** Only the hero is a full-resolution original (2200 px). The other five
+  came from sources that cap free downloads at around 1000 px, so they are served at
+  their native size and will look soft on a large display. They are placeholders that
+  photograph well at a glance, not finished assets.
+- **Subject.** `parties` is the weakest — an infinity pool over wooded hills, which
+  reads tropical resort rather than Côte d'Azur. Replace that one first. `yachts` is a
+  cappuccino on a table rather than coffee served on a deck.
+
+To replace one, drop `name.webp` and `name.jpg` into `/img/` over the existing pair.
+No other change is needed. Export at 2200 px wide for the hero and 1800 px for the
+bands, and keep each WebP under about 60 KB — the hero under 100 KB.
 
 Rules from the brief: nothing with visible logos, recognisable faces, or editorial-only
-sports licensing. Export at 1600 px wide, WebP with a JPEG fallback, and keep each file
-under about 60 KB — the hero under 100 KB.
+sports licensing. There is no image tooling in this repo; the current set was produced
+with `sharp`, e.g.:
+
+```bash
+npx sharp-cli -i shot.jpg -o img/parties.webp resize 1800 1013 --fit cover -- webp -q 76
+```
 
 ## Weight
 
-First load is the HTML plus two font files. Everything else is cached for a year.
+Everything is cached for a year after the first visit.
 
 | | |
 |---|---|
-| `index.html` (markup + all CSS) | ~17 KB |
+| `index.html` (markup + all CSS) | ~18 KB |
 | `newsreader-latin.woff2` | ~129 KB |
 | `schibsted-grotesk-latin.woff2` | ~46 KB |
-| **Total, no photography** | **~192 KB** |
+| `hero.webp` (preloaded) | ~82 KB |
+| **Above the fold** | **~275 KB** |
+| the five band photographs (WebP) | ~163 KB |
+| **Whole page** | **~437 KB** |
+
+Measured in the browser, not estimated. Inside the 500 KB budget, with the caveat that
+CSS background images are not deferred the way `loading="lazy"` defers an `<img>`, so
+the band photographs are fetched on the first visit rather than on scroll.
 
 The `latin-ext` font files ship too but are only fetched if a page actually uses an
 Eastern European character, because each `@font-face` carries a `unicode-range`. They
 cost nothing on a normal visit.
-
-Adding all six photographs at the sizes above lands around 450 KB — still inside budget,
-and only the hero loads before the fold.
 
 ## Deployment
 

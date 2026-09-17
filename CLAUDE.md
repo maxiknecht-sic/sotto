@@ -116,5 +116,8 @@ Schibsted Grotesk (400/500) for body. Base 17px, line-height 1.65, measure 62ch.
 - Real email address on the domain, replacing `hello@sotto.example`.
 - Specification figures in the spec table are placeholders and must be replaced
   with measured values before launch.
-- Six images to source or shoot. Stock is acceptable as an interim; nothing with
-  visible logos, recognisable faces, or editorial-only sports licensing.
+- Six images to source or shoot. Interim CC0/CC-BY stock is in place as of
+  2026-09-17 and is flagged in README.md: only the hero is full resolution, and
+  the `parties` shot reads tropical resort rather than Côte d'Azur. Replace with
+  a real shoot; nothing with visible logos, recognisable faces, or editorial-only
+  sports licensing.
