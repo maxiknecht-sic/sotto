@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Sotto — Specialty coffee &amp; bar service</title>
-<meta name="description" content="Specialty coffee and bar service for yachts, private parties and sport hospitality. Monaco, Cannes and the Côte d'Azur.">
+<title>Sotto — Specialty coffee &amp; espresso martini service</title>
+<meta name="description" content="Specialty coffee and espresso martini service for yachts, private parties and sport hospitality. Monaco, Cannes and the Côte d'Azur.">
 <link rel="canonical" href="https://sotto.services/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#0E1A21">
@@ -13,16 +13,16 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sotto">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Sotto — Specialty coffee &amp; bar service">
-<meta property="og:description" content="Specialty coffee and bar service for yachts, private parties and sport hospitality. Monaco, Cannes and the Côte d'Azur.">
+<meta property="og:title" content="Sotto — Specialty coffee &amp; espresso martini service">
+<meta property="og:description" content="Specialty coffee and espresso martini service for yachts, private parties and sport hospitality. Monaco, Cannes and the Côte d'Azur.">
 <meta property="og:url" content="https://sotto.services/">
 <meta property="og:image" content="https://sotto.services/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Sotto — specialty coffee and bar service">
+<meta property="og:image:alt" content="Sotto — specialty coffee and espresso martini service">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sotto — Specialty coffee &amp; bar service">
-<meta name="twitter:description" content="Specialty coffee and bar service for yachts, private parties and sport hospitality. Monaco, Cannes and the Côte d'Azur.">
+<meta name="twitter:title" content="Sotto — Specialty coffee &amp; espresso martini service">
+<meta name="twitter:description" content="Specialty coffee and espresso martini service for yachts, private parties and sport hospitality. Monaco, Cannes and the Côte d'Azur.">
 <meta name="twitter:image" content="https://sotto.services/assets/og.png">
 
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -116,9 +116,14 @@
   .z-night .mute,.z-deep .mute,.z-dusk .mute{color:var(--dark-mute)}
   .z-paper .mute,.z-stone .mute{color:var(--light-mute)}
 
-  /* ---- image slots ---- */
+  /* ---- image slots ----
+     Held to a column rather than bled full width: the source is 736px, and across a
+     1440px viewport it was being stretched to twice its size. Contained, it renders
+     at roughly 1:1 and reads sharp. ---- */
   .shot{
     aspect-ratio:16/9;
+    max-width:46rem;
+    margin:0 var(--pad);
     background-color:#21313A;
     background-position:center;
     background-size:cover;
@@ -209,6 +214,29 @@
     max-width:24ch;
   }
 
+  .hero-sub{
+    font-size:1rem;
+    line-height:1.5;
+    letter-spacing:.01em;
+    margin:1.4rem 0 0;
+    max-width:34ch;
+    color:var(--dark-mute);
+  }
+
+  /* ---- two columns where the copy pairs up ---- */
+  .duo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(2.5rem,6vw,5.5rem);
+    max-width:72rem;
+    align-items:start;
+  }
+  .duo h2{margin-bottom:1.5rem}
+  .duo p{max-width:46ch}
+  @media (max-width:60rem){
+    .duo{grid-template-columns:1fr;gap:clamp(3rem,9vw,4.5rem);max-width:var(--col)}
+  }
+
   h2{
     font-family:var(--serif);
     font-weight:300;
@@ -270,6 +298,7 @@
   .reveal{opacity:0;transform:translateY(14px);animation:rise 1.1s cubic-bezier(.22,.61,.36,1) forwards}
   .reveal-2{animation-delay:.18s}
   .reveal-3{animation-delay:.34s}
+  .reveal-4{animation-delay:.5s}
   @keyframes rise{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){
     .reveal{animation:none;opacity:1;transform:none}
@@ -283,27 +312,27 @@
 
 <header class="hero">
   <h1 class="mark reveal">sotto</h1>
-  <p class="descriptor reveal reveal-2">Specialty coffee &amp; bar service</p>
+  <p class="descriptor reveal reveal-2">Specialty coffee &amp; espresso martini service</p>
   <p class="hero-line reveal reveal-3">Everything at your event was chosen with care. The coffee wasn&rsquo;t.</p>
+  <p class="hero-sub reveal reveal-4">Bring the world&rsquo;s best specialty coffee to your event.</p>
 </header>
 
 <main id="main">
 
 <section class="z-deep">
-  <div class="col">
-    <h2>The one thing nobody curated</h2>
-    <p>The wine is chosen. The caviar is sourced. The menu is built by someone who cares about it. Then the coffee arrives from a pod machine, or from a flask that has been standing since breakfast.</p>
-    <p>It is the only thing on the table that no one considered, and the thing your guests will ask for most often across a long day.</p>
-    <p class="mute">In a five-star hotel this has usually been solved. On a deck, on a villa terrace, in a hospitality suite or at a private residence, it has not.</p>
-  </div>
-</section>
-
-<section class="z-paper">
-  <div class="col">
-    <h2>What we actually do</h2>
-    <p class="lead">One exceptional coffee, dialled by hand and held there all day.</p>
-    <p>Decaf on a second grinder, because at a late dinner someone always asks. Batch brew for volume. Milk drinks made properly and poured properly, in glassware that belongs on your table.</p>
-    <p>No syrup rack, no flavour list, no menu board. Your guests are not choosing between fourteen drinks. They are being handed the best cup they have had all week, made in front of them.</p>
+  <div class="duo">
+    <div>
+      <h2>The one thing nobody curated</h2>
+      <p>The wine is chosen. The caviar is sourced. The menu is built by someone who cares about it. Then the coffee arrives from a pod machine, or from a flask that has been standing since breakfast.</p>
+      <p>It is the only thing on the table that no one considered, and the thing your guests will ask for most often across a long day.</p>
+      <p class="mute">In a five-star hotel this has usually been solved. On a deck, on a villa terrace, in a hospitality suite or at a private residence, it has not.</p>
+    </div>
+    <div>
+      <h2>What we actually do</h2>
+      <p class="lead">One exceptional coffee, dialled by hand and held there all day.</p>
+      <p>Decaf on a second grinder, because at a late dinner someone always asks. Batch brew for volume. Milk drinks made properly and poured properly, in glassware that belongs on your table.</p>
+      <p>No syrup rack, no flavour list, no menu board. Your guests are not choosing between fourteen drinks. They are being handed the best cup they have had all week, made in front of them.</p>
+    </div>
   </div>
 </section>
 
@@ -350,26 +379,25 @@
 </section>
 
 <section class="z-stone">
-  <div class="wide">
-    <h2>Specifications</h2>
-    <dl class="spec">
-      <dt>Footprint</dt><dd>From 2.0 × 0.8 m</dd>
-      <dt>Power</dt><dd>1 × 16A, or generator-fed</dd>
-      <dt>Water</dt><dd>Carried on site — no plumbing required</dd>
-      <dt>Crew</dt><dd>One to three, uniformed</dd>
-      <dt>Setup</dt><dd>45 minutes. Breakdown 30.</dd>
-      <dt>Service</dt><dd>Up to 14 hours, split shifts available</dd>
-    </dl>
-    <p class="note mute">Self-contained. We do not use your galley, your kitchen or your bar, and the space is handed back exactly as we found it.</p>
-  </div>
-</section>
-
-<section class="z-paper">
-  <div class="col">
-    <h2>A crew you can put next to your guests</h2>
-    <p>Our people come from international sport event delivery — UEFA EURO 2020 and 2024, the UEFA Champions League Finals of 2021 and 2025, and stadium hospitality in Berlin.</p>
-    <p>The habits of accredited environments come with them. NDAs signed as standard. No phones on service. No photography of guests, and nothing posted afterwards.</p>
-    <p class="mute">If you are putting your own name behind a supplier, this is the part that matters.</p>
+  <div class="duo">
+    <div>
+      <h2>Specifications</h2>
+      <dl class="spec">
+        <dt>Footprint</dt><dd>From 2.0 × 0.8 m</dd>
+        <dt>Power</dt><dd>1 × 16A, or generator-fed</dd>
+        <dt>Water</dt><dd>Carried on site — no plumbing required</dd>
+        <dt>Crew</dt><dd>One to three, uniformed</dd>
+        <dt>Setup</dt><dd>45 minutes. Breakdown 30.</dd>
+        <dt>Service</dt><dd>Up to 14 hours, split shifts available</dd>
+      </dl>
+      <p class="note mute">Self-contained. We do not use your galley, your kitchen or your bar, and the space is handed back exactly as we found it.</p>
+    </div>
+    <div>
+      <h2>A crew you can put next to your guests</h2>
+      <p>Our people come from international sport event delivery — UEFA EURO 2020 and 2024, the UEFA Champions League Finals of 2021 and 2025, and stadium hospitality in Berlin.</p>
+      <p>The habits of accredited environments come with them. NDAs signed as standard. No phones on service. No photography of guests, and nothing posted afterwards.</p>
+      <p class="mute">If you are putting your own name behind a supplier, this is the part that matters.</p>
+    </div>
   </div>
 </section>
 
@@ -393,7 +421,7 @@
 </main>
 
 <footer>
-  <p>Sotto — specialty coffee &amp; bar service. Monaco, Cannes and the Côte d&rsquo;Azur.</p>
+  <p>Sotto — specialty coffee &amp; espresso martini service. Monaco, Cannes and the Côte d&rsquo;Azur.</p>
   <p class="mute legal-links">
     <a href="/legal/">Legal notice</a>
     <a href="/privacy/">Privacy</a>
@@ -406,8 +434,8 @@
   "@type": "ProfessionalService",
   "@id": "https://sotto.services/#business",
   "name": "Sotto",
-  "alternateName": "Sotto — Specialty coffee & bar service",
-  "description": "Specialty coffee and bar service for private yachts, private parties and sport hospitality on the Côte d'Azur.",
+  "alternateName": "Sotto — Specialty coffee & espresso martini service",
+  "description": "Specialty coffee and espresso martini service for private yachts, private parties and sport hospitality on the Côte d'Azur.",
   "url": "https://sotto.services/",
   "email": "hello@sotto.example",
   "image": "https://sotto.services/assets/og.png",

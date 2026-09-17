@@ -1,6 +1,6 @@
 # Sotto — website
 
-Static one-page site for **Sotto**, a specialty coffee and bar service for private yachts,
+Static one-page site for **Sotto**, a specialty coffee and espresso martini service for private yachts,
 private parties and sport hospitality on the Côte d'Azur.
 
 The design is the approved `sotto.html` comp, ported unchanged. See `CLAUDE.md` for the
@@ -116,14 +116,14 @@ visit.
 
 | | |
 |---|---|
-| `index.html` (markup + all CSS) | ~17 KB |
+| `index.html` (markup + all CSS) | ~18 KB |
 | `newsreader-latin.woff2` | ~86 KB |
 | `schibsted-grotesk-latin.woff2` | ~32 KB |
 | `hero.webp` (preloaded) | ~179 KB |
 | **Above the fold** | **~316 KB** |
 | three service-area images (WebP, lazy) | ~152 KB |
-| `night.webp` (full-width band) | ~20 KB |
-| **Whole page** | **~488 KB** |
+| `night.webp` (band) | ~24 KB |
+| **Whole page** | **~493 KB** |
 
 Inside the 500 KB budget, with little room left. The hero is the expensive part: an
 aerial full of buildings and boats does not compress the way open water does, so it is
@@ -133,6 +133,11 @@ photograph means re-measuring — a fourth image does not fit.
 The band image is a CSS background, which is not deferred the way `loading="lazy"`
 defers an `<img>`, so it is fetched on the first visit rather than on scroll. The three
 grid images are genuinely lazy.
+
+The band is held to `max-width:46rem` — 736 px, which is exactly the source width, so it
+renders 1:1 and reads sharp. Bled full width it was being stretched to roughly twice its
+size on a desktop viewport. If you replace that photograph with a larger one, the width
+cap can go.
 
 ### The fonts are cut down — do not replace them from Google
 

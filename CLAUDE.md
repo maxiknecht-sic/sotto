@@ -1,6 +1,6 @@
 # Sotto — project context
 
-Static one-page site for **Sotto**, a specialty coffee and bar service for private
+Static one-page site for **Sotto**, a specialty coffee and espresso martini service for private
 yachts, private parties and sport hospitality on the Côte d'Azur.
 
 `sotto.html` is the approved design. Port it, don't redesign it.
@@ -27,7 +27,7 @@ Consequences:
 **Name:** Sotto — from *sotto voce*, in a low voice. Discretion is the product.
 
 **Descriptor (always paired with the name, never changed):**
-Specialty coffee & bar service
+Specialty coffee & espresso martini service
 
 **Positioning:** Every part of a premium event is curated — the wine, the caviar,
 the menu. The coffee isn't. It arrives from a pod machine. Sotto fixes the one
