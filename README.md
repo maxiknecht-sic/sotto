@@ -87,7 +87,7 @@ top of `index.html`, because they bleed edge to edge:
 
 | Slot | Source | Licence |
 |---|---|---|
-| `hero` | Pexels #34155535, 1800 px | Pexels licence — free commercial use, no attribution |
+| `hero` | Pexels #18501146, Monte Carlo harbour, 1800 px | Pexels licence — free commercial use, no attribution |
 | `night` | supplied by the client, 736 px | **unverified** |
 | `area-yachts`, `area-parties`, `area-sport` | supplied by the client, ~736 px | **unverified** |
 
@@ -117,26 +117,42 @@ visit.
 | | |
 |---|---|
 | `index.html` (markup + all CSS) | ~17 KB |
-| `newsreader-latin.woff2` | ~129 KB |
-| `schibsted-grotesk-latin.woff2` | ~46 KB |
-| `hero.webp` (preloaded) | ~85 KB |
-| **Above the fold** | **~276 KB** |
+| `newsreader-latin.woff2` | ~86 KB |
+| `schibsted-grotesk-latin.woff2` | ~32 KB |
+| `hero.webp` (preloaded) | ~179 KB |
+| **Above the fold** | **~316 KB** |
 | three service-area images (WebP, lazy) | ~152 KB |
 | `night.webp` (full-width band) | ~20 KB |
-| **Whole page** | **~449 KB** |
+| **Whole page** | **~488 KB** |
 
-Inside the 500 KB budget. The hero is held at WebP quality 58 and 1800 px: open water is
-expensive to compress, and at quality 76 and 2200 px the same shot cost 168 KB and put
-the page over budget. It survives the lower setting because the subject is near-abstract
-dark water, where lost detail is invisible — a sharp-edged photograph would not.
+Inside the 500 KB budget, with little room left. The hero is the expensive part: an
+aerial full of buildings and boats does not compress the way open water does, so it is
+held at 1800 px and WebP quality 48 and still costs 179 KB. Swapping in another detailed
+photograph means re-measuring — a fourth image does not fit.
 
 The band image is a CSS background, which is not deferred the way `loading="lazy"`
 defers an `<img>`, so it is fetched on the first visit rather than on scroll. The three
 grid images are genuinely lazy.
 
-The `latin-ext` font files ship too but are only fetched if a page actually uses an
-Eastern European character, because each `@font-face` carries a `unicode-range`. They
-cost nothing on a normal visit.
+### The fonts are cut down — do not replace them from Google
+
+The files in `/fonts/` are **not** what Google Fonts serves. Both families were
+instanced to the weights this site actually uses and stripped of layout features it
+never calls, which took the two latin files from 173 KB to 118 KB:
+
+```bash
+python3 -m fontTools.varLib.instancer fonts/newsreader-latin.woff2 wght=200:400   --output=tmp.ttf
+python3 -m fontTools.subset tmp.ttf --unicodes='*'   --layout-features='kern,liga,clig,rlig,ccmp,locl,mark,mkmk'   --desubroutinize --flavor=woff2 --output-file=fonts/newsreader-latin.woff2
+```
+
+Newsreader is capped at **wght 200–400**, Schibsted Grotesk at **wght 400–500**. The
+optical-size axis on Newsreader is deliberately left intact, so the wordmark still
+renders exactly as designed. The `unicode-range` values in the CSS are unchanged.
+
+The trap: ask for a weight above the cap — `font-weight:600` on a heading — and the
+browser clamps silently to 400 instead of rendering heavier. If the design ever needs a
+bolder cut, re-instance from the Google original with a wider range rather than editing
+the CSS and wondering why nothing changed.
 
 ## Deployment
 
