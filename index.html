@@ -143,13 +143,24 @@
     max-width:var(--content);
     margin-inline:auto;
   }
+  /* The frame is fixed and the picture moves inside it, so nothing reflows and
+     the hover costs no layout shift. */
+  .area-item picture{
+    display:block;
+    overflow:hidden;
+    margin-bottom:1.5rem;
+  }
   .area-item img{
     width:100%;
     height:auto;
     aspect-ratio:3/4;
     object-fit:cover;
     display:block;
-    margin-bottom:1.5rem;
+    transition:transform .7s cubic-bezier(.22,.61,.36,1);
+  }
+  @media (hover:hover){
+    .area-item:hover img,
+    .area-item:focus-within img{transform:scale(1.04)}
   }
   .area-item h3{
     margin:0 0 .9rem;
@@ -159,7 +170,8 @@
   .area-item p{max-width:42ch}
   @media (max-width:60rem){
     .area-grid{grid-template-columns:1fr;gap:clamp(2.5rem,7vw,3.5rem);max-width:var(--col)}
-    .area-item img{aspect-ratio:4/3;margin-bottom:1.25rem}
+    .area-item picture{margin-bottom:1.25rem}
+    .area-item img{aspect-ratio:4/3}
   }
 
   /* ---- hero ---- */
@@ -305,6 +317,10 @@
   @media (prefers-reduced-motion:reduce){
     .reveal{animation:none;opacity:1;transform:none}
     *{transition:none!important}
+    /* transition:none only removes the easing — without this the image would
+       still jump to the scaled size on hover. */
+    .area-item:hover img,
+    .area-item:focus-within img{transform:none}
   }
 </style>
 </head>

@@ -65,8 +65,10 @@ Deliberate choices — keep them:
   service day. Section backgrounds encode this; don't flatten them.
 - **No cards, no shadows, no rounded corners.** Hairline rules only, and only
   where they carry structural information (the spec table).
-- **One motion moment:** the hero reveal on load. Nothing else animates.
-  `prefers-reduced-motion` is respected.
+- **Motion is rationed:** the hero reveal on load, and a 4% zoom on the service-area
+  images on hover. Nothing else animates. Both are disabled under
+  `prefers-reduced-motion`, and the hover is gated behind `@media (hover:hover)` so it
+  never sticks on a touch screen.
 
 ### Tokens (see `:root` in sotto.html)
 
