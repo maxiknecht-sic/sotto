@@ -1,0 +1,7 @@
+# Sotto — https://sotto.services
+# The site is one page. Everything on it is public and may be indexed.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sotto.services/sitemap.xml
